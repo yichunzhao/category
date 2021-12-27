@@ -18,5 +18,8 @@ public class RatingCategory {
         rateList.stream().collect(Collectors.partitioningBy(rate -> rate.getScore() >= 4));
     log.info("score greaterThanAndEqualTo 4, RateList: {}", scoreGreaterEqualToScoreFour.get(true));
     log.info("score lessThan 4, RateList: {}", scoreGreaterEqualToScoreFour.get(false));
+
+    //collector to unModified set
+
   }
 }

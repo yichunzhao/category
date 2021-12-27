@@ -7,6 +7,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @NoArgsConstructor(access = AccessLevel.NONE)
@@ -35,7 +36,7 @@ public class TestData {
     List<Rate> rateList = new ArrayList<>();
     IntStream.range(0, clientIds.size())
         .forEach(i -> rateList.add(new Rate(clientIds.get(i), yearMonths.get(i), rates.get(i))));
-    return rateList;
+    return rateList.stream().collect(Collectors.toUnmodifiableList());
   }
 
   public static TestData instance() {
