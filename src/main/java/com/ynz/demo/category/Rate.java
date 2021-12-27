@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class Rate {
-    private UUID clientId;
-    private YearMonth date;
-    private int score;
+  private UUID clientId;
+  private YearMonth date;
+  private int score;
 }
