@@ -24,7 +24,7 @@ public class RatingCategory {
     var max = rateList.stream().max(Rate::compareTo);
     log.info("Rate having max score: {} ", max.isPresent() ? max.get() : "not present!");
 
-    // teeing both Collectors in one statement,ana merging both results together.
+    // teeing both Collectors in one statement,and then merging both results together.
     var teeingBoth =
         rateList.stream()
             .collect(
