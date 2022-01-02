@@ -11,6 +11,7 @@ public class RatingCategory {
 
   public static void main(String[] args) {
     var rateList = TestData.instance().genTestRates();
+    log.info("rate list: {}", rateList);
     var scoreRateListMap = rateList.stream().collect(Collectors.groupingBy(Rate::getScore));
     log.info("Score RateList Map: {}", scoreRateListMap);
 
@@ -38,9 +39,20 @@ public class RatingCategory {
     var sortedRatesByScore = rateList.stream().sorted().toList();
     log.info("sorted rate by natural order: {} ", sortedRatesByScore);
 
-    // drop elements satisfy predicts.
+    // drop while is applied on a sorted stream
     var scoreLessEqualToThree =
         rateList.stream().sorted().dropWhile(rate -> rate.getScore() <= 3).toList();
     log.info("rates score <= 3 {} ", scoreLessEqualToThree);
+
+    log.info("rate list: {}", rateList);
+
+    // drop while on un-ordered stream
+    // As per the API documentation, when the dropWhile is applied on an unordered Stream, it can
+    // drop any subset of matching elements, but the behavior is non-deterministic and so it may
+    // return a different result each time. So basically, what this means is that the dropWhile
+    // method may or may not drop a subset of elements that match the specified Predicate.
+    var scoreLessEqualToThreeNotOrdered =
+        rateList.stream().dropWhile(rate -> rate.getScore() <= 3).toList();
+    log.info("rates score <= 3 {} ", scoreLessEqualToThreeNotOrdered);
   }
 }
