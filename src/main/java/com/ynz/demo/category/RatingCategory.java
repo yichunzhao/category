@@ -2,7 +2,7 @@ package com.ynz.demo.category;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,5 +54,9 @@ public class RatingCategory {
     var scoreLessEqualToThreeNotOrdered =
         rateList.stream().dropWhile(rate -> rate.getScore() <= 3).toList();
     log.info("rates score <= 3 {} ", scoreLessEqualToThreeNotOrdered);
+
+    // Returns an array containing the elements of this stream
+    var scoreArray = rateList.stream().map(Rate::getScore).toArray(Integer[]::new);
+    log.info("return an array of scores: {}", Arrays.toString(scoreArray));
   }
 }
