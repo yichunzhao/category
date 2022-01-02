@@ -2,6 +2,7 @@ package com.ynz.demo.category;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,5 +34,13 @@ public class RatingCategory {
                     Collectors.minBy(Rate::compareTo),
                     List::of));
     log.info("teeing both max and min: {}", teeingBoth);
+
+    var sortedRatesByScore = rateList.stream().sorted().toList();
+    log.info("sorted rate by natural order: {} ", sortedRatesByScore);
+
+    // drop elements satisfy predicts.
+    var scoreLessEqualToThree =
+        rateList.stream().sorted().dropWhile(rate -> rate.getScore() <= 3).toList();
+    log.info("rates score <= 3 {} ", scoreLessEqualToThree);
   }
 }
